@@ -46,6 +46,15 @@ module Rapidfire
         format.js
       end
     end
+    
+
+    def update_position
+      @question_group = QuestionGroup.find(params[:question_group_id])
+      params[:order].each do |key, value|
+        @question_group.questions.find(value[:id]).update_attribute(:position, value[:position])
+      end
+      render nothing: true
+    end
 
     private
 
